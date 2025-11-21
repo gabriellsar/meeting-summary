@@ -17,8 +17,8 @@ services:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
   worker:
-    build: ./app     
-    command: celery -A main.celery_app worker --loglevel=info
+    build: ./app
+    command: celery -A main.celery_app worker --pool=solo --loglevel=info
     volumes:
       - ./app:/app
       - ./uploads:/app/uploads

@@ -37,9 +37,11 @@ def request_status(taskId: str):
 
 @celery_app.task
 def process(filePath: str):
-    
-    print(f"Transcrição do arquivo: {filePath}", flush=True)
-    result = model.transcribe(filePath) 
-    print("Fim da transcrição", flush=True)
-    transcription = result["text"].lower()
+    try:
+        print("Resumindo...")
+        result = model.transcribe(filePath) 
+        transcription = result["text"].lower()
+        print("Fim.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
     return {"transcription" : transcription}
