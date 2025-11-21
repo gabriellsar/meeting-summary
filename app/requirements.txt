@@ -1,0 +1,10 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+openai-whisper
+
+fastapi[standard]
+uvicorn[standard]
+celery
+redis
+python-multipart
+requests
