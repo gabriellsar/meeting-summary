@@ -24,6 +24,9 @@ services:
       - ./uploads:/app/uploads
     depends_on:
       - redis
+    env_file:
+      - .env
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - OMP_NUM_THREADS=8
