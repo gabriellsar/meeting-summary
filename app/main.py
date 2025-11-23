@@ -1,4 +1,5 @@
 from fastapi import FastAPI,UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from celery import Celery
 import time
 import whisper
@@ -6,6 +7,15 @@ from google import genai
 import os
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 celery_app = Celery(
     'worker',
     broker='redis://redis:6379/0',
