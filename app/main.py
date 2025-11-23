@@ -4,10 +4,6 @@ import time
 import whisper
 from google import genai
 import os
-from dotenv import load_dotenv
-
-print(load_dotenv())
-
 
 app = FastAPI()
 celery_app = Celery(
@@ -17,7 +13,6 @@ celery_app = Celery(
 )
 
 API_KEY = os.getenv("GEMINI_API_KEY")
-print(f"API_KEY {API_KEY}")
 
 model = whisper.load_model("base")
 
