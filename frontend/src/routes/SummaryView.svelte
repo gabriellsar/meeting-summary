@@ -1,6 +1,12 @@
 <script lang="ts">
+    import { marked } from 'marked';
+
+    let { summary = "" } = $props();
+
     let message: string = $state("");
-    let textAreaRef: HTMLTextAreaElement;
+    let textAreaRef: HTMLTextAreaElement | undefined = $state();
+    
+    let parsedSummary = $derived(marked.parse(summary));
 
     $effect(() => {
         message;
@@ -14,6 +20,12 @@
 </script>
 
 <div class="summary-view">
+    <div class="content-display">    
+        <div class="markdown-body">
+            {@html parsedSummary}
+        </div>
+    </div>
+
     <div class="input-container">
         <textarea 
             placeholder="Pesquisar..." 
@@ -38,6 +50,19 @@
         border-radius: 20px;
         padding: 10px;
         overflow: hidden;
+
+        scrollbar-color: transparent transparent;
+    }
+    .content-display {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 60px;
+
+        overflow-y: auto;
+        padding: 20px;
+        box-sizing: border-box; 
     }
     .input-container {
         position: absolute;
@@ -51,13 +76,15 @@
         align-items: center;
         
         background-color: #1E1F20;
-        border-top: 2px solid var(--color-background-dark);
+        border-top: 5px solid var(--color-background-dark);
 
         overflow: hidden;
         padding: 10px;
 
         box-sizing: border-box; 
         color: var(--color-primary-dark);
+
+        box-shadow: 0 -30px 15px var(--color-background-dark)
     }
 
     textarea {

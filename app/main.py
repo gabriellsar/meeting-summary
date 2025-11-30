@@ -30,7 +30,7 @@ model = whisper.load_model("base")
 def read_root():
     return {"message": "Docker está funcionando! O ambiente está pronto."}
 
-@app.post("/")
+@app.post("/api/process-audio")
 def post_root(myFile: UploadFile):
     path = f"uploads/{myFile.filename}"
 
@@ -40,12 +40,12 @@ def post_root(myFile: UploadFile):
     result = process.delay(path)
     return {"id" : result.id}
 
-@app.get("/result/{taskId}")
+@app.get("/api/get-summary/{taskId}")
 def request_status(taskId: str):
     task = celery_app.AsyncResult(taskId)
     return {
         "state" : task.state,
-        "result" : task.result
+        "result" : task.result if task.state == "SUCCESS" else str(task.result)
     }
 
 @celery_app.task
