@@ -1,0 +1,16 @@
+:root {
+    --color-background-dark: #131314;
+    --color-text-dark: #e5f3fa;
+    --color-primary-dark: #86cbe9;
+    --color-secondary-dark: #182281;
+    --color-accent-dark: #4222e2;
+    
+    --color-background-light: #e7ebee;
+    --color-text-light: #05131a;
+    --color-primary-light: #1aa8ea;
+    --color-secondary-light: #7e88e7;
+    --color-accent-light: #3d1ddd;
+
+    --font-family-headings: "Inter", sans-serif;
+    --font-family-body: "Inconsolata", monospace;
+}
